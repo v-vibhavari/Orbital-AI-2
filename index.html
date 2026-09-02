@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Orbital AI - Ask questions. Understand Earth.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Background Cosmic Glows -->
+  <div class="space-bg">
+    <div class="glow-sphere glow-1"></div>
+    <div class="glow-sphere glow-2"></div>
+    <div class="stars-layer"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="brand-badge">
+        <span class="pulse-dot"></span>
+        <span>EARTH OBSERVATION AI</span>
+      </div>
+      <div class="logo-wrapper">
+        <div class="logo-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/>
+            <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+        </div>
+        <h1 class="app-title">Orbital <span class="gradient-text">AI</span></h1>
+      </div>
+      <p class="app-subtitle">Ask questions. Understand Earth.</p>
+    </header>
+
+    <!-- Main 2-Column Section -->
+    <main class="main-grid">
+      <!-- Left Column: Image Upload & Preview -->
+      <section class="panel image-panel">
+        <div class="panel-header">
+          <div class="panel-title-wrapper">
+            <svg class="panel-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+              <circle cx="8.5" cy="8.5" r="1.5"/>
+              <polyline points="21 15 16 10 5 21"/>
+            </svg>
+            <h2>Satellite Imagery</h2>
+          </div>
+          <button id="resetImageBtn" class="text-btn hidden" title="Remove image">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+            Clear
+          </button>
+        </div>
+
+        <!-- Upload Dropzone -->
+        <div id="dropzone" class="upload-dropzone">
+          <input type="file" id="imageInput" accept="image/*" class="file-input" />
+          <div class="dropzone-content">
+            <div class="upload-icon-circle">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="17 8 12 3 7 8"/>
+                <line x1="12" y1="3" x2="12" y2="15"/>
+              </svg>
+            </div>
+            <p class="upload-primary-text"><strong>Click to upload</strong> or drag & drop</p>
+            <p class="upload-secondary-text">Satellite, aerial, or drone imagery (PNG, JPG, TIFF, WebP)</p>
+          </div>
+        </div>
+
+        <!-- Image Preview Box -->
+        <div id="previewContainer" class="preview-container hidden">
+          <div class="image-wrapper">
+            <img id="previewImage" src="" alt="Uploaded Satellite Image" />
+            <div class="reticle-overlay">
+              <span class="corner tl"></span>
+              <span class="corner tr"></span>
+              <span class="corner bl"></span>
+              <span class="corner br"></span>
+              <div class="scan-line"></div>
+            </div>
+          </div>
+          <div class="image-meta">
+            <div class="meta-item">
+              <span class="meta-label">File</span>
+              <span id="metaFileName" class="meta-val">image.jpg</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Resolution</span>
+              <span id="metaDimensions" class="meta-val">Calculating...</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Status</span>
+              <span class="meta-val status-badge ready">Ready for Scan</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Preset Satellite Samples -->
+        <div class="preset-samples">
+          <span class="preset-label">Or select a calibrated prototype scenario:</span>
+          <div class="preset-buttons">
+            <button type="button" class="preset-btn" data-sample="flood" data-title="flood_image.png">
+              🌊 Flooding
+            </button>
+            <button type="button" class="preset-btn" data-sample="deforestation" data-title="deforestation_image.png">
+              🌲 Deforestation
+            </button>
+            <button type="button" class="preset-btn" data-sample="urban" data-title="urban_development.png">
+              🏙️ Urban Grid
+            </button>
+            <button type="button" class="preset-btn" data-sample="agriculture" data-title="agricultural_image.png">
+              🌾 Agriculture
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Column: Query & Analysis -->
+      <section class="panel query-panel">
+        <div class="panel-header">
+          <div class="panel-title-wrapper">
+            <svg class="panel-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <h2>Natural Language Query</h2>
+          </div>
+          <span class="model-badge">Vision AI v1.0</span>
+        </div>
+
+        <!-- Question Input Box -->
+        <div class="input-group">
+          <label for="questionInput" class="input-label">What would you like to investigate?</label>
+          <div class="textarea-wrapper">
+            <textarea
+              id="questionInput"
+              placeholder="e.g. What can you see in this image? Is this an urban or rural area? Are there roads or water bodies?"
+              rows="3"
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- Quick Question Suggestions -->
+        <div class="quick-questions-section">
+          <label class="input-label">Quick Prompts:</label>
+          <div class="quick-chips-grid">
+            <button type="button" class="chip-btn" data-question="What can you see in this satellite image? Provide an overview of the landscape and major structures.">
+              <span>🔍</span> Describe Image
+            </button>
+            <button type="button" class="chip-btn" data-question="Is this an urban or rural area? What features indicate this?">
+              <span>🏙️</span> Urban or Rural?
+            </button>
+            <button type="button" class="chip-btn" data-question="Detect and identify roads, buildings, and man-made infrastructure in this capture.">
+              <span>🏗️</span> Detect Buildings & Roads
+            </button>
+            <button type="button" class="chip-btn" data-question="Analyze vegetation cover, green spaces, and agricultural patterns in this scene.">
+              <span>🌿</span> Analyze Vegetation
+            </button>
+            <button type="button" class="chip-btn" data-question="Are there any water bodies such as rivers, lakes, oceans, or reservoirs visible?">
+              <span>🌊</span> Detect Water Bodies
+            </button>
+          </div>
+        </div>
+
+        <!-- Analyze Button -->
+        <button id="analyzeBtn" class="analyze-btn">
+          <span class="btn-shine"></span>
+          <div class="btn-content">
+            <svg class="btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+            <span id="analyzeBtnText">Analyze Image</span>
+          </div>
+        </button>
+
+        <!-- Response Container -->
+        <div id="responseContainer" class="response-container hidden">
+          <!-- Loading State -->
+          <div id="loadingState" class="loading-state hidden">
+            <div class="orbital-loader">
+              <div class="satellite-dish">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M4 10a7.5 7.5 0 0 0 10 10"/>
+                  <path d="M4 14a3.5 3.5 0 0 0 6 6"/>
+                  <path d="M12 2a10 10 0 0 1 10 10"/>
+                  <circle cx="12" cy="12" r="2"/>
+                </svg>
+              </div>
+              <div class="pulse-ring ring-1"></div>
+              <div class="pulse-ring ring-2"></div>
+            </div>
+            <p class="loading-title">Processing Satellite Telemetry...</p>
+            <p class="loading-subtitle">Running multispectral & visual feature extraction</p>
+          </div>
+
+          <!-- AI Response Card -->
+          <div id="responseCard" class="response-card hidden">
+            <div class="response-header">
+              <div class="response-title-wrap">
+                <span class="ai-sparkle">✨</span>
+                <h3>AI Analysis Result</h3>
+              </div>
+              <div class="response-actions">
+                <span id="responseSourceBadge" class="source-badge">FastAPI / AI</span>
+                <button id="copyResponseBtn" class="icon-btn" title="Copy response to clipboard">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div id="responseBody" class="response-body">
+              <!-- Rendered response content injected by app.js -->
+            </div>
+            <div class="response-footer">
+              <span class="footer-note">SatQuery AI • Earth Intelligence Engine</span>
+              <span id="analysisTimestamp" class="footer-time">Just now</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>Orbital AI • Simple & Modern Earth Observation Intelligence • Built for Hackathons & Space Tech Demos</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
